@@ -1,11 +1,6 @@
 dist: trusty
 jdk:
   - openjdk11
-deploy:
-  provider: heroku
-  api_key:
-    secure: $HEROKU_KEY_API
-  app: java-project-template
 script:
   - mvn clean install
   - mvn sonar:sonar
@@ -13,3 +8,14 @@ cache:
   directories:
     - "$HOME/.m2/repository"
     - "$HOME/.sonar/cache"
+deploy:
+  provider: heroku
+  edge: true
+  api_key:
+    secure: $HEROKU_KEY_API
+  app:
+    master: java-project-template
+#    dev: java-project-template-dev
+#  run:
+#    - "make db:migrate"
+#    - restart
