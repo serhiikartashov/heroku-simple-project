@@ -1,19 +1,15 @@
 dist: trusty
-
 jdk:
   - openjdk11
-
 deploy:
   provider: heroku
   api_key:
     secure: $HEROKU_KEY_API
   app: java-project-template
-
 script:
   - mvn clean install
   - mvn sonar:sonar
-
 cache:
   directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+    - "$HOME/.m2/repository"
+    - "$HOME/.sonar/cache"
