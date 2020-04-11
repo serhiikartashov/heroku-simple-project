@@ -3,12 +3,6 @@ dist: trusty
 jdk:
   - openjdk11
 
-addons:
-  sonarcloud:
-    organization: "serhiikartashov"
-    token:
-      secure: $SONAR_TOKEN
-
 deploy:
   provider: heroku
   api_key:
@@ -16,8 +10,8 @@ deploy:
   app: java-project-template
 
 script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=searhiy_java-project-template
+  - mvn clean install
+  - mvn sonar:sonar
 
 cache:
   directories:
