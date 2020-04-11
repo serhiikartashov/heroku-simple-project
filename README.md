@@ -28,6 +28,16 @@ origin  https://github.com/searhiy/java-project-template.git (push)
 NOTE: heroku filter logs
 https://devcenter.heroku.com/articles/logging
 
+NOTE: heroku postgresql
+https://elements.heroku.com/addons/heroku-postgresql
+https://devcenter.heroku.com/articles/heroku-postgresql
+* ```heroku addons:create heroku-postgresql:hobby-dev --version=9.5```
+* ```heroku pg:wait``` 
+* ```heroku config``` -- will return connection $DATABASE_URL to database (AWS)
+* ```heroku run echo \$JDBC_DATABASE_URL``` -- use this url for JDBC
+https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java
+https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java#using-the-database_url-in-plain-jdbc
+
 ###NOTE: java servlet annotations
 https://www.codejava.net/java-ee/servlet/servlet-annotations-reference
 

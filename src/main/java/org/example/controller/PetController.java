@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +60,19 @@ public class PetController extends HttpServlet {
                 )
         );
         log.info("return pets: {}", allPets.stream().map(Pet::toString).collect(Collectors.toList()).toString());
+        try {
+            Connection connection = PetController.getConnection();
+            if (connection!=null) {
+                log.info("got connection to DB");
+            }
+        } catch (URISyntaxException | SQLException e) {
+            log.error("Can't connect to DB", e);
+        }
         printWriter.println(petHtmlpage.render());
+    }
+
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return DriverManager.getConnection(dbUrl);
     }
 }
