@@ -10,17 +10,3 @@ cache:
   directories:
   - "$HOME/.m2/repository"
   - "$HOME/.sonar/cache"
-#deploy:
-#  skip_cleanup: true
-#  provider: heroku
-#  api_key:
-#    secure: Y9dN2WWhUeiDN3T998+cilh3kB8xaRIR2Ide5BVxIFGTTSPHCxtqhKFmUhpYDl/Zj2PIV0wc/anlG5ESJTKTWNvTaCT81qoZXD33Ni4kD/18Kv3fjnDt+IjOoHxN1JPa49Sru2WOA0nZcqn7ijf3vq2evG8v7IgXCFNI3JGatniaQvS7lVzXreF80jtPMNPvMKRdg3g9DkoklsN055fse6gvPHqMCvC8W9PGuhdDMuTuYtQgE/R6d4bZFjEpYtsxklfWDxaSxmqutw2rRgs6I3m+u67pcn4B023Sos1TU22H4SUqpabzNCSOXe+YcDiefL8/IIgQ8iJYt5XG7YAUyPmgUUI6RiU+WxNk3uX5S+CBp0iPf1Wo/VAztKbH6PJXFil/33FToOPHgXoZWvKE3YtXCHFYJ+k3QEl3kXkOtImnDGVqLBAIKOIbY7sFxhiz5ciBGfgsOHDYXnAQ6m1vyjWdWVXd3y894c2Hl+xzvAklZiVs5F6rvRC01SluVGN777RYJEkPl6jet4VcWaVEZFbbqWIZAJQ7qCbAXbBaqC8yPpM4bdZ5fqHze34jcjKnKENiGQcCV0iaJG508DuZQAxQWPCt7rGtS2M1gSmDviwMV/3KOfmpElzOoJxJgCq8Kos++Buz77W1rN73I49BuaHWU7prY7G8XC1exXk7akg=
-#  app: java-project-template
-#  on:
-#    repo: searhiy/java-project-template
-#  app:
-#    master: java-project-template
-#    dev: java-project-template-dev
-#  run:
-#    - "make db:migrate"
-#    - restart
