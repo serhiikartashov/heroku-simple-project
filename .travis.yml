@@ -1,3 +1,5 @@
+sudo: required
+
 dist: trusty
 jdk:
   - openjdk11
@@ -10,7 +12,7 @@ cache:
     - "$HOME/.sonar/cache"
 deploy:
   provider: heroku
-  edge: true
+#  edge: true
   api_key:
     secure: $HEROKU_KEY_API
   app:
