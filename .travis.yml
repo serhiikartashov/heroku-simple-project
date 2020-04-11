@@ -5,7 +5,7 @@ jdk:
 script:
 - mvn clean install
 - mvn sonar:sonar
-#- mvn heroku:deploy-war
+- mvn heroku:deploy-war
 cache:
   directories:
   - "$HOME/.m2/repository"
