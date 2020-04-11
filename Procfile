@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port 80 target/java-project-template-1.0-SNAPSHOT.war

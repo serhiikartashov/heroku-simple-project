@@ -26,24 +26,31 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
+<!--                    <httpConnector>-->
+<!--                        <port>8080</port>-->
+<!--                    </httpConnector>-->
                     <!-- set jar for jar archive -->
                     <supportedPackagings>war</supportedPackagings>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.2</version>
+                <configuration>
+                    <jdkVersion>11</jdkVersion>
+                    <appName>java-project-template</appName>
+                </configuration>
+<!--                <processTypes>-->
+<!--                    <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>-->
+<!--                </processTypes>-->
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

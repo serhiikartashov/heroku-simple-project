@@ -1,6 +1,9 @@
 package org.example.controller;
 
 import j2html.tags.ContainerTag;
+import org.example.listener.MyContextListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +18,12 @@ import static j2html.TagCreator.*;
 @WebServlet(name ="welcome", urlPatterns = "/", loadOnStartup = 1)
 public class WelcomeController extends HttpServlet {
 
+    private static Logger log = LoggerFactory.getLogger(WelcomeController.class);
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("text/html");
+        log.info("Visited Welcome page!");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
         ContainerTag welcomeHtml = html(
                 head(

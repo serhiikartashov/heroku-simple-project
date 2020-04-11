@@ -40,4 +40,13 @@ public class Pet {
     public String getImage() {
         return "image_url";
     }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", breed='" + breed + '\'' +
+                '}';
+    }
 }

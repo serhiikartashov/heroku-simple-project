@@ -3,6 +3,8 @@ package org.example.controller;
 import j2html.tags.ContainerTag;
 import org.example.entity.Pet;
 import org.example.service.PetService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static j2html.TagCreator.*;
 
@@ -20,6 +23,8 @@ import static j2html.TagCreator.*;
  */
 @WebServlet(name ="pets", urlPatterns = "/pets")
 public class PetController extends HttpServlet {
+
+    private static Logger log = LoggerFactory.getLogger(PetController.class);
 
     /**
      * Show all pets.
@@ -50,6 +55,7 @@ public class PetController extends HttpServlet {
                         )
                 )
         );
+        log.info("return pets: {}", allPets.stream().map(Pet::toString).collect(Collectors.toList()).toString());
         printWriter.println(petHtmlpage.render());
     }
 }
