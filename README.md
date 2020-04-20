@@ -6,6 +6,7 @@ This is template for CI configurations
 * ```mvn jetty:run```
 
 ## heroku
+https://devcenter.heroku.com/articles/heroku-cli-commands
 * create account on heroku.com
 * ```heroku login```
 * ```heroku create java-project-template```
@@ -34,9 +35,11 @@ https://devcenter.heroku.com/articles/heroku-postgresql
 * ```heroku addons:create heroku-postgresql:hobby-dev --version=9.5```
 * ```heroku pg:wait``` 
 * ```heroku config``` -- will return connection $DATABASE_URL to database (AWS)
+https://devcenter.heroku.com/articles/config-vars
 * ```heroku run echo \$JDBC_DATABASE_URL``` -- use this url for JDBC
 https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java
 https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java#using-the-database_url-in-plain-jdbc
+git://github.com/heroku/devcenter-java-database.git
 
 ###NOTE: java servlet annotations
 https://www.codejava.net/java-ee/servlet/servlet-annotations-reference
@@ -48,3 +51,32 @@ https://www.codejava.net/java-ee/servlet/servlet-annotations-reference
 * @HandlesTypes annotation
 * @MultipartConfig annotation
 * @ServletSecurity, @HttpMethodConstraint and @HttpConstraint annotations
+
+
+https://api.nasa.gov/
+BwKaaRv4epDjcbXXiLdcURczJyUwTkNrSabQHeZ9
+i.e.
+https://api.nasa.gov/planetary/apod?api_key=BwKaaRv4epDjcbXXiLdcURczJyUwTkNrSabQHeZ9
+
+
+https://www.w3.org/TR/html-json-forms/
+```
+<form enctype='application/json'>
+  <input name='name' value='Bender'>
+  <select name='hind'>
+    <option selected>Bitable</option>
+    <option>Kickable</option>
+  </select>
+  <input type='checkbox' name='shiny' checked>
+</form>
+
+// produces
+{
+  "name":   "Bender"
+, "hind":   "Bitable"
+, "shiny":  true
+}
+```
+
+https://www.w3schools.com/tags/att_form_action.asp
+https://www.codejava.net/java-ee/servlet/handling-html-form-data-with-java-servlet

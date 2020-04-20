@@ -1,13 +1,16 @@
 package org.example.entity;
 
 public class Pet {
+    private int id;
     private String name;
     private int age;
     private String breed;
 
-    public Pet(){}
+    public Pet() {
+    }
 
-    public Pet(String name, int age, String breed) {
+    public Pet(int id, String name, int age, String breed) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.breed = breed;
@@ -43,10 +46,6 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", breed='" + breed + '\'' +
-                '}';
+        return new com.google.gson.Gson().toJson(this);
     }
 }
