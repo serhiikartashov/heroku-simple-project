@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static j2html.TagCreator.*;
+import static org.example.utils.HTMLTemplates.*;
 
 /**
  * https://readlearncode.com/servlet-4-features/
@@ -39,13 +40,9 @@ public class PetController extends HttpServlet {
         PetService petService = new PetService();
         List<Pet> allPets = petService.getAllPets();
         ContainerTag petHtmlpage = html(
-                head(
-                        title("Pet List"),
-                        link()
-                                .withRel("stylesheet")
-                                .withHref("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-                ),
+                HEAD,
                 body(
+                        NAV,
                         div(attrs("#pets"),
                                 p("Some sibling element"),
                                 each(allPets, pet ->
@@ -56,7 +53,8 @@ public class PetController extends HttpServlet {
                                                 p(pet.getBreed())
                                         )
                                 )
-                        )
+                        ),
+                        FOOTER
                 )
         );
         log.info("return pets: {}", allPets.stream().map(Pet::toString).collect(Collectors.toList()).toString());
