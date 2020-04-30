@@ -17,7 +17,17 @@ import java.util.stream.Collectors;
 @WebServlet(name ="api_pets", urlPatterns = "/api/pets")
 public class PetRestAPI extends HttpServlet {
 
+    /*
+    CRUD
+    C - post (json object)
+    R - get (json object or list json's objects)
+    U - put (json object)
+    D - delete (id)
+     */
+
     private static Logger log = LoggerFactory.getLogger(org.example.controller.PetController.class);
+
+    PetService petService = new PetService();
 
     /**
      * Show all pets.
@@ -28,7 +38,21 @@ public class PetRestAPI extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=UTF-8");
 
-        PetService petService = new PetService();
+
+        List<Pet> allPets = petService.getAllPets();
+        String json = allPets.stream().map(Pet::toString).collect(Collectors.toList()).toString();
+
+        log.info("return pets: {}", json);
+
+        printWriter.println(json);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter printWriter = response.getWriter();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
+//        Stream<String> lines = request.getReader().lines();
+
         List<Pet> allPets = petService.getAllPets();
         String json = allPets.stream().map(Pet::toString).collect(Collectors.toList()).toString();
 
