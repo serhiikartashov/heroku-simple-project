@@ -1,9 +1,15 @@
 # java-project-template
 This is template for CI configurations
 
-## launch
-* ```mvn install```
-* ```mvn jetty:run```
+## Running App
+
+Terminal:
+ * `sh target/bin/webapp`
+
+IDEA:
+ * launch `forest.detector.Launcher` (entry point)
+ * add `mvn package` | `mvn clean package` command into launcher
+ * add to VM options `-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager` for logging tomcat server
 
 ## heroku
 https://devcenter.heroku.com/articles/heroku-cli-commands
