@@ -3,16 +3,19 @@ package org.example;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;
 import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.realm.JDBCRealm;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.EmptyResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
+import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.scan.StandardJarScanFilter;
 import org.apache.tomcat.util.scan.StandardJarScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +40,10 @@ public class Launcher {
         }
 
         tomcat.setPort(Integer.parseInt(webPort));
+        // connector configurations
+        // https://www.eclipse.org/virgo/documentation/virgo-documentation-3.6.4.RELEASE/docs/virgo-user-guide/html/ch13s07.html
         tomcat.getConnector();
+
         File webContentFolder = new File(root.getAbsolutePath(), "target/classes");
         if (!webContentFolder.exists()) {
             webContentFolder = Files.createTempDirectory("default-doc-base").toFile();
@@ -76,9 +82,49 @@ public class Launcher {
     }
 
     /** YOUR CHANGES HERE **/
-    private static void serverConfiguration(StandardContext ctx, Tomcat tomcat) {
+    private static void serverConfiguration(StandardContext ctx, Tomcat tomcat) throws URISyntaxException {
         // server configs
-//        tomcat.getConnector().setAttribute("maxThreads", 2);
+        tomcat.getConnector().setAttribute("maxThreads", 200);
+
+        // https://tomcat.apache.org/tomcat-9.0-doc/realm-howto.html
+        // https://tomcat.apache.org/tomcat-9.0-doc/config/realm.html
+        // jdbc realm configuration
+        JDBCRealm jdbcRealm = new JDBCRealm();
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+        log.debug(dbUri.toString());
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String connectionURL = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+        log.debug(connectionURL);
+        jdbcRealm.setConnectionURL(connectionURL);
+        jdbcRealm.setConnectionName(username);
+        jdbcRealm.setConnectionPassword(password);
+        jdbcRealm.setDriverName("org.postgresql.Driver");
+        jdbcRealm.setUserTable("users");
+        jdbcRealm.setUserNameCol("user_name");
+        jdbcRealm.setUserCredCol("user_passwd");
+        jdbcRealm.setUserRoleTable("user_roles");
+        jdbcRealm.setRoleNameCol("role_name");
+
+        // custom realm
+        // https://dzone.com/articles/how-to-implement-a-new-realm-in-tomcat
+
+        // LockOutRealm - provide a user lock out mechanism if there are
+        // too many failed authentication attempts in a given period of time.
+        ctx.setRealm(jdbcRealm);
+
+        // https://docs.oracle.com/cd/E19226-01/820-7627/bncbn/index.html
+        LoginConfig loginConfig = new LoginConfig();
+        // FORM (jsp) - https://stackoverflow.com/questions/11382159/tomcat-7-form-based-authentification
+        // FORM (html) - https://docs.oracle.com/cd/E19226-01/820-7627/bncby/index.html
+        // Digest - https://docs.oracle.com/cd/E19226-01/820-7627/bncbw/index.html
+        // CLIENT-CERT - https://docs.oracle.com/cd/E19226-01/820-7627/bncbs/index.html
+        loginConfig.setAuthMethod("BASIC");
+//        loginConfig.setLoginPage("");
+//        loginConfig.setErrorPage("");
+        ctx.setLoginConfig(loginConfig);
+
+        //
 
         // context configs
         ctx.setSessionTimeout(30);
