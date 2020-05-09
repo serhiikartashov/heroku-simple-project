@@ -1,6 +1,9 @@
 # java-project-template
 This is template for CI configurations
 
+[![Build Status](https://travis-ci.com/searhiy/java-project-template.svg?branch=master)](https://travis-ci.com/searhiy/java-project-template)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=org.itcluster%3Ajava-project-template&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.itcluster%3Ajava-project-template)
+
 ## Running App
 
 Terminal:
