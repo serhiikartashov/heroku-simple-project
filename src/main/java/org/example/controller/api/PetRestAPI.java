@@ -1,4 +1,4 @@
-package org.example.api;
+package org.example.controller.api;
 
 import org.example.entity.Pet;
 import org.example.service.PetService;
@@ -14,10 +14,13 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * CRUD operations for pets
+ */
 @WebServlet(name ="api_pets", urlPatterns = "/api/pets")
 public class PetRestAPI extends HttpServlet {
 
-    private static Logger log = LoggerFactory.getLogger(org.example.controller.PetController.class);
+    private static Logger log = LoggerFactory.getLogger(PetRestAPI.class);
 
     /**
      * Show all pets.

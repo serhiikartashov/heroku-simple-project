@@ -1,3 +1,4 @@
+-- user management
 create table users (
   USER_NAME           varchar(15) not null primary key,
   USER_PASSWD         varchar(15) not null
@@ -11,7 +12,9 @@ create table user_roles (
   primary key (USER_NAME, ROLE_NAME)
 );
 insert into user_roles (USER_NAME, ROLE_NAME) values('admin','admin');
-insert into user_roles (USER_NAME, ROLE_NAME) values('admin','manager-api');
-insert into user_roles (USER_NAME, ROLE_NAME) values('admin','manager-gui');
+insert into user_roles (USER_NAME, ROLE_NAME) values('admin','moderator-api');
+insert into user_roles (USER_NAME, ROLE_NAME) values('admin','moderator-gui');
 insert into user_roles (USER_NAME, ROLE_NAME) values('moderator','moderator-api');
 insert into user_roles (USER_NAME, ROLE_NAME) values('moderator','moderator-gui');
+
+-- media content

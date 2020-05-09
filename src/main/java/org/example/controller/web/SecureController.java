@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.web;
 
 import j2html.tags.ContainerTag;
 import org.slf4j.Logger;
