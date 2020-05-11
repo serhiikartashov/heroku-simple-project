@@ -89,3 +89,5 @@ https://www.w3.org/TR/html-json-forms/
 
 https://www.w3schools.com/tags/att_form_action.asp
 https://www.codejava.net/java-ee/servlet/handling-html-form-data-with-java-servlet
+
+https://stackoverflow.com/questions/3541077/design-patterns-web-based-applications/

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 @WebFilter(
+        filterName = "filter1",
         urlPatterns = "/uploadFilter",
         initParams = @WebInitParam(name = "fileTypes", value = "doc;xls;zip;txt;jpg;png;gif")
 )

@@ -1,13 +1,19 @@
 package org.example.utils;
 
 import j2html.tags.ContainerTag;
+import org.apache.catalina.realm.GenericPrincipal;
+
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
+import java.util.Objects;
 
 import static j2html.TagCreator.*;
 
 public class HTMLTemplates {
 
     public static final ContainerTag HEAD = head(
-            title("Welcome Java 9 Group"),
+            title("Welcome To Template Project"),
             script().withSrc("https://www.googletagmanager.com/gtag/js?id=UA-165975475-1").attr("async"),
             script("window.dataLayer = window.dataLayer || [];\n" +
                     "    function gtag(){dataLayer.push(arguments);}\n" +
@@ -41,32 +47,38 @@ public class HTMLTemplates {
 //                    .attr("crossorigin", "anonymous")
     );
 
-    public static final ContainerTag NAV = nav(
-        div(
-                a("LoopLAB").withHref("/").withClass("navbar-brand"),
-                button(
-                        span().withClass("navbar-toggler-icon")
-                ).withClass("navbar-toggler").attr("data-toggle", "collapse").attr("data-target", "#navbarCollapse"),
+    public static ContainerTag NAV(HttpServletRequest request) {
+        return nav(
                 div(
-                        ul(
-                                li(a("Home").withHref("#home").withClass("nav-link")),
-                                li(a("Explore").withHref("#explore-head-section").withClass("nav-link")),
-                                li(a("Create").withHref("#create-head-section").withClass("nav-link")),
-                                li(a("Share").withHref("#share-head-section").withClass("nav-link"))
-                        ).withClasses("navbar-nav", "ml-auto")
-                ).withClasses("collapse", "navbar-collapse").withId("navbarCollapse")
-        ).withClasses("container")
-    ).withClasses("navbar", "navbar-expand-sm", "bg-dark navbar-dark", "fixed-top");
+                        a("LoopLAB").withHref("/").withClass("navbar-brand"),
+                        button(
+                                span().withClass("navbar-toggler-icon")
+                        ).withClass("navbar-toggler").attr("data-toggle", "collapse").attr("data-target", "#navbarCollapse"),
+                        div(
+                                ul(
+                                        li(a("Home").withHref("/home").withClass("nav-link")),
+                                        li(a("Template1").withHref("/template1").withClass("nav-link")),
+                                        li(a("Files").withHref("/files").withClass("nav-link")),
+                                        iff(Objects.requireNonNullElse(
+                                                ((GenericPrincipal) request.getSession().getAttribute("principal")),
+                                                new GenericPrincipal("anonymous", "anonymous", List.of())
+                                                ).hasRole("admin"),
+                                                li(a("Admin").withHref("/secure").withClass("nav-link")))
+                                ).withClasses("navbar-nav", "ml-auto")
+                        ).withClasses("collapse", "navbar-collapse").withId("navbarCollapse")
+                ).withClasses("container")
+        ).withClasses("navbar", "navbar-expand-sm", "bg-dark navbar-dark", "fixed-top");
+    }
 
     public static final ContainerTag FOOTER = footer(
             div(
                     div(
                             div(
-                                h3("LoopLAB"),
-                                p("Copyright @").with(span().withId("year")),
-                                button("Contact Us").withClasses("btn", "btn-primary")
-                                        .attr("data-toggle", "modal")
-                                        .attr("data-target", "#contactModal")
+                                    h3("LoopLAB"),
+                                    p("Copyright @").with(span().withId("year")),
+                                    button("Contact Us").withClasses("btn", "btn-primary")
+                                            .attr("data-toggle", "modal")
+                                            .attr("data-target", "#contactModal")
                             ).withClasses("col", "text-center", "py-4")
                     ).withClasses("row")
             ).withClasses("container")

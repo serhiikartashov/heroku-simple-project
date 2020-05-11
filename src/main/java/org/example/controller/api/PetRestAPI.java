@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 /**
  * CRUD operations for pets
+ * https://software.danielwatrous.com/restful-java-servlet-serializing-tofrom-json-with-jackson/
  */
 @WebServlet(name ="api_pets", urlPatterns = "/api/pets")
 public class PetRestAPI extends HttpServlet {
@@ -26,7 +27,6 @@ public class PetRestAPI extends HttpServlet {
      * Show all pets.
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String contextPath = request.getContextPath();
         PrintWriter printWriter = response.getWriter();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=UTF-8");
