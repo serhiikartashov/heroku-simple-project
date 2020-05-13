@@ -134,7 +134,7 @@ public class Launcher {
         // datasource realm configuration
         DataSourceRealm dataSourceRealm = new DataSourceRealm();
         dataSourceRealm.setDataSourceName("hikariDataSource");
-//        dataSourceRealm.setLocalDataSource(true);
+        dataSourceRealm.setLocalDataSource(true);
         dataSourceRealm.setUserTable("users");
         dataSourceRealm.setUserNameCol("user_name");
         dataSourceRealm.setUserCredCol("user_passwd");
@@ -182,7 +182,10 @@ public class Launcher {
         // FORM (html) - https://docs.oracle.com/cd/E19226-01/820-7627/bncby/index.html
         // Digest - https://docs.oracle.com/cd/E19226-01/820-7627/bncbw/index.html
         // CLIENT-CERT - https://docs.oracle.com/cd/E19226-01/820-7627/bncbs/index.html
+
+        // http://www.mtitek.com/tutorials/samples/tomcat-form-auth.php
         loginConfig.setAuthMethod("FORM");
+//        loginConfig.setRealmName("DataSourceRealm");
 //        loginConfig.setLoginPage("/login");
         loginConfig.setLoginPage("/html/login.html");
         loginConfig.setErrorPage("/html/login.html");

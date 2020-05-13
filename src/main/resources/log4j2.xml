@@ -8,6 +8,7 @@
   <Loggers>
     <Logger name="org.apache" level="ERROR"/>
     <Logger name="com.zaxxer" level="ERROR"/>
+    <Logger name="org.postgresql" level="ERROR"/>
     <Root level="debug">
       <AppenderRef ref="Console"/>
     </Root>

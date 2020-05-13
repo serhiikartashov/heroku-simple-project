@@ -48,21 +48,21 @@ public class LoginController extends HttpServlet {
         response.getWriter().println(homeHtml.render());
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        String email = request.getParameter("username");
-        String pass = request.getParameter("passwd");
-
-        if (userService.checkUser(email, pass)) {
-            RequestDispatcher rs = request.getRequestDispatcher("home");
-            rs.forward(request, response);
-        } else {
-            log.debug("Username or Password incorrect");
-            RequestDispatcher rs = request.getRequestDispatcher("login");
-            rs.include(request, response);
-        }
-    }
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        PrintWriter out = response.getWriter();
+//
+//        String email = request.getParameter("username");
+//        String pass = request.getParameter("passwd");
+//
+//        if (userService.checkUser(email, pass)) {
+//            RequestDispatcher rs = request.getRequestDispatcher("home");
+//            rs.forward(request, response);
+//        } else {
+//            log.debug("Username or Password incorrect");
+//            RequestDispatcher rs = request.getRequestDispatcher("login");
+//            rs.include(request, response);
+//        }
+//    }
 }
