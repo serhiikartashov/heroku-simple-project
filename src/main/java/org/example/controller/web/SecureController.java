@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Principal;
 
 import static j2html.TagCreator.body;
 import static j2html.TagCreator.html;
 import static org.example.utils.HTMLTemplates.*;
 
+// https://github.com/andreacomo/tomcat-jwt-security
 @WebServlet(name = "secure", urlPatterns = "/secure", loadOnStartup = 1)
 @ServletSecurity(@HttpConstraint(rolesAllowed = "admin"))
 public class SecureController extends HttpServlet {

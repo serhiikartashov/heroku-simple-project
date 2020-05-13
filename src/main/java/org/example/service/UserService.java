@@ -17,4 +17,8 @@ public class UserService {
     public List<User> getUsers(){
         return repo.getUsers();
     }
+
+    public boolean checkUser(String username, String passwd){
+        return repo.checkUser(username, passwd);
+    }
 }

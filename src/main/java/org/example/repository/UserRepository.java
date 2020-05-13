@@ -4,6 +4,9 @@ import org.example.entity.User;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class UserRepository {
@@ -19,10 +22,25 @@ public class UserRepository {
             // test connection here
             Connection connection = dataSource.getConnection();
             connection.close();
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
         return List.of(new User());
     }
 
+    public boolean checkUser(String username, String passwd) {
+        boolean st = false;
+        try (Connection con = dataSource.getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement("select * from users where user_name=? and user_passwd=?");
+            ps.setString(1, username);
+            ps.setString(2, passwd);
+            ResultSet rs = ps.executeQuery();
+            st = rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return st;
+    }
 }
