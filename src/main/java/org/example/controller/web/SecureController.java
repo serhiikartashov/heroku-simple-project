@@ -26,7 +26,7 @@ public class SecureController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Visited Secure page!");
-        request.getSession().setAttribute("principal", (GenericPrincipal)request.getUserPrincipal());
+//        request.getSession().setAttribute("principal", (GenericPrincipal)request.getUserPrincipal());
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);

@@ -6,7 +6,6 @@ import org.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import static j2html.TagCreator.body;
@@ -48,21 +46,12 @@ public class LoginController extends HttpServlet {
         response.getWriter().println(homeHtml.render());
     }
 
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//
-//        String email = request.getParameter("username");
-//        String pass = request.getParameter("passwd");
-//
-//        if (userService.checkUser(email, pass)) {
-//            RequestDispatcher rs = request.getRequestDispatcher("home");
-//            rs.forward(request, response);
-//        } else {
-//            log.debug("Username or Password incorrect");
-//            RequestDispatcher rs = request.getRequestDispatcher("login");
-//            rs.include(request, response);
-//        }
-//    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.login(request.getParameter("username"),
+                          request.getParameter("passwd"));
+        request.getSession().setAttribute("principal", request.getUserPrincipal());
+        response.sendRedirect("/home");
+//        request.logout();
+    }
 }
