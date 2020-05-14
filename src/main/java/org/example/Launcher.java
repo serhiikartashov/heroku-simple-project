@@ -3,20 +3,16 @@ package org.example;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;
 import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.core.StandardHost;
-import org.apache.catalina.core.StandardServer;
-import org.apache.catalina.deploy.NamingResourcesImpl;
 import org.apache.catalina.realm.DataSourceRealm;
-import org.apache.catalina.realm.JDBCRealm;
 import org.apache.catalina.session.JDBCStore;
 import org.apache.catalina.session.PersistentManager;
-import org.apache.catalina.session.StandardSession;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.valves.PersistentValve;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.EmptyResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
-import org.apache.tomcat.util.descriptor.web.*;
+import org.apache.tomcat.util.descriptor.web.ContextResource;
+import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.scan.StandardJarScanFilter;
 import org.apache.tomcat.util.scan.StandardJarScanner;
 import org.slf4j.Logger;
@@ -138,7 +134,7 @@ public class Launcher {
         // datasource realm configuration
         DataSourceRealm dataSourceRealm = new DataSourceRealm();
         dataSourceRealm.setDataSourceName("hikariDataSource");
-//        dataSourceRealm.setLocalDataSource(true);
+        dataSourceRealm.setLocalDataSource(true);
         dataSourceRealm.setUserTable("users");
         dataSourceRealm.setUserNameCol("user_name");
         dataSourceRealm.setUserCredCol("user_passwd");
@@ -171,19 +167,6 @@ public class Launcher {
 
         PersistentValve persistentValve = new PersistentValve();
         tomcat.getHost().getPipeline().addValve(persistentValve);
-//        StandardHost standardHost = new StandardHost();
-//        standardHost.getPipeline().addValve(persistentValve);
-//        tomcat.setHost(standardHost);
-
-
-
-//        StandardSession standardSession = new StandardSession(persistentManager);
-//        standardSession.activate();
-//        ContextEnvironment contextEnvironment = new ContextEnvironment();
-//        contextEnvironment.setType("rg.apache.catalina.session.StandardSession.ACTIVITY_CHECK");
-//        contextEnvironment.setType("java.lang.Boolean");
-//        contextEnvironment.setValue("true");
-//        ctx.getNamingResources().addEnvironment(contextEnvironment);
 
         // custom realm
         // https://dzone.com/articles/how-to-implement-a-new-realm-in-tomcat
@@ -199,9 +182,13 @@ public class Launcher {
         // FORM (html) - https://docs.oracle.com/cd/E19226-01/820-7627/bncby/index.html
         // Digest - https://docs.oracle.com/cd/E19226-01/820-7627/bncbw/index.html
         // CLIENT-CERT - https://docs.oracle.com/cd/E19226-01/820-7627/bncbs/index.html
-        loginConfig.setAuthMethod("BASIC");
-//        loginConfig.setLoginPage("");
-//        loginConfig.setErrorPage("");
+
+        // http://www.mtitek.com/tutorials/samples/tomcat-form-auth.php
+        loginConfig.setAuthMethod("FORM");
+//        loginConfig.setRealmName("DataSourceRealm");
+//        loginConfig.setLoginPage("/login");
+        loginConfig.setLoginPage("/html/login.html");
+        loginConfig.setErrorPage("/html/login.html");
         ctx.setLoginConfig(loginConfig);
 
         //

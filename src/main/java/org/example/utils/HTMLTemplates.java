@@ -63,8 +63,12 @@ public class HTMLTemplates {
                                                 ((GenericPrincipal) request.getSession().getAttribute("principal")),
                                                 new GenericPrincipal("anonymous", "anonymous", List.of())
                                                 ).hasRole("admin"),
-                                                li(a("Admin").withHref("/secure").withClass("nav-link")))
-                                ).withClasses("navbar-nav", "ml-auto")
+                                                li(a("Admin").withHref("/secure").withClass("nav-link"))),
+                                        iff(Objects.isNull(request.getSession().getAttribute("principal")),
+                                                li(a("Login").withHref("/login").withClass("nav-link"))),
+                                        iff(Objects.nonNull(request.getSession().getAttribute("principal")),
+                                                li(a("Logout").withHref("/logout").withClass("nav-link")))
+                                        ).withClasses("navbar-nav", "ml-auto")
                         ).withClasses("collapse", "navbar-collapse").withId("navbarCollapse")
                 ).withClasses("container")
         ).withClasses("navbar", "navbar-expand-sm", "bg-dark navbar-dark", "fixed-top");
@@ -83,4 +87,26 @@ public class HTMLTemplates {
                     ).withClasses("row")
             ).withClasses("container")
     ).withId("main-footer").withClasses("bg-dark");
+
+    public static ContainerTag LOGINFORM(HttpServletRequest request) {
+        return header(
+                div(
+                        div(
+                                div(
+                                        h2("Hello, please log in:"), br(), br(),
+                                        form(
+                                                p(), strong("Please Enter Your User Name: "),
+                                                input().withType("text").withName("username").attr("size", 25),
+                                                p(), p(), strong("Please Enter Your Password: "),
+                                                input().withType("password").withName("passwd").attr("size", 15),
+                                                p(),p(),
+                                                input().withType("submit").withValue("Submit"),
+                                                // reset doesn't work for now
+                                                input().withType("reset").withValue("Reset")
+                                        ).withAction("login").withMethod("post")
+                                ).withClass("row")
+                        ).withClasses("home-inner", "container")
+                ).withClass("dark-overlay")
+        ).withId("home-section");
+    }
 }
