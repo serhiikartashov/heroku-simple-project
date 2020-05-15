@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static j2html.TagCreator.*;
+import static org.example.utils.Utils.requestInitialized;
 
 /**
  * https://readlearncode.com/servlet-4-features/
@@ -34,6 +35,7 @@ public class PetController extends HttpServlet {
      * Show all pets.
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        requestInitialized(request, log);
         PrintWriter printWriter = response.getWriter();
 
         PetService petService = new PetService();

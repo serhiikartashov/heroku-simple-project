@@ -2,13 +2,17 @@ package org.example.utils;
 
 import j2html.tags.ContainerTag;
 import org.apache.catalina.realm.GenericPrincipal;
+import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import static j2html.TagCreator.*;
+import static org.example.utils.Utils.hasRoles;
 
 public class HTMLTemplates {
 
@@ -58,12 +62,10 @@ public class HTMLTemplates {
                                 ul(
                                         li(a("Home").withHref("/home").withClass("nav-link")),
                                         li(a("Template1").withHref("/template1").withClass("nav-link")),
-                                        li(a("Files").withHref("/files").withClass("nav-link")),
-                                        iff(Objects.requireNonNullElse(
-                                                ((GenericPrincipal) request.getSession().getAttribute("principal")),
-                                                new GenericPrincipal("anonymous", "anonymous", List.of())
-                                                ).hasRole("admin"),
-                                                li(a("Admin").withHref("/secure").withClass("nav-link"))),
+                                        iff(hasRoles(request, List.of("admin", "moderator-gui")),
+                                                li(a("Files").withHref("/files").withClass("nav-link"))),
+                                        iff(hasRoles(request, List.of("admin")),
+                                                li(a("Admin").withHref("/admin").withClass("nav-link"))),
                                         iff(Objects.isNull(request.getSession().getAttribute("principal")),
                                                 li(a("Login").withHref("/login").withClass("nav-link"))),
                                         iff(Objects.nonNull(request.getSession().getAttribute("principal")),

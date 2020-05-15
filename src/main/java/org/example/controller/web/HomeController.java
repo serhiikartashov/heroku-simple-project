@@ -17,6 +17,7 @@ import java.util.List;
 import static j2html.TagCreator.body;
 import static j2html.TagCreator.html;
 import static org.example.utils.HTMLTemplates.*;
+import static org.example.utils.Utils.requestInitialized;
 
 @WebServlet(name = "home", urlPatterns = "/home", loadOnStartup = 1)
 public class HomeController extends HttpServlet {
@@ -27,6 +28,7 @@ public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Visited Home page!");
+        requestInitialized(request, log);
         if (userService == null) {
             userService = new UserService((DataSource) request.getServletContext().getAttribute("datasource"));
         }

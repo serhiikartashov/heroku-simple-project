@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -18,14 +17,16 @@ import static org.example.utils.HTMLTemplates.*;
 import static org.example.utils.Utils.hasRoles;
 import static org.example.utils.Utils.requestInitialized;
 
-@WebServlet(name = "files", urlPatterns = "/files")
-public class FilesController extends HttpServlet {
+// https://github.com/andreacomo/tomcat-jwt-security
+@WebServlet(name = "admin", urlPatterns = "/admin", loadOnStartup = 1)
+public class AdminController extends HttpServlet {
 
-    private static Logger log = LoggerFactory.getLogger(FilesController.class);
+    private static Logger log = LoggerFactory.getLogger(AdminController.class);
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.info("Visited Secure page!");
         requestInitialized(request, log);
-        if (!hasRoles(request, List.of("admin", "moderator-gui"))) {
+        if (!hasRoles(request, List.of("admin"))) {
             response.sendRedirect(request.getHeader("referer"));
         } else {
             response.setCharacterEncoding("UTF-8");

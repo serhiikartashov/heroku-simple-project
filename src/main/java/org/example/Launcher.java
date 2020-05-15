@@ -184,11 +184,11 @@ public class Launcher {
         // CLIENT-CERT - https://docs.oracle.com/cd/E19226-01/820-7627/bncbs/index.html
 
         // http://www.mtitek.com/tutorials/samples/tomcat-form-auth.php
-        loginConfig.setAuthMethod("FORM");
+        loginConfig.setAuthMethod("BASIC");
 //        loginConfig.setRealmName("DataSourceRealm");
 //        loginConfig.setLoginPage("/login");
-        loginConfig.setLoginPage("/html/login.html");
-        loginConfig.setErrorPage("/html/login.html");
+//        loginConfig.setLoginPage("/html/login.html");
+//        loginConfig.setErrorPage("/html/login.html");
         ctx.setLoginConfig(loginConfig);
 
         //

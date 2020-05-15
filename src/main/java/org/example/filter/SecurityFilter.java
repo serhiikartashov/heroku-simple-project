@@ -5,12 +5,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
-@WebFilter(
-        filterName = "filter1",
-        urlPatterns = "/uploadFilter",
-        initParams = @WebInitParam(name = "fileTypes", value = "doc;xls;zip;txt;jpg;png;gif")
-)
-public class UploadFilter implements Filter {
+@WebFilter(filterName = "securityFilter", urlPatterns = {"/admin", "/files"})
+public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -18,7 +14,7 @@ public class UploadFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+        chain.doFilter(request, response);
     }
 
     @Override
