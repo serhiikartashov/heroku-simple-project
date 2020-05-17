@@ -106,7 +106,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <id>unpack-newrelic</id>
@@ -121,6 +121,7 @@
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <outputDirectory>${project.basedir}</outputDirectory>
+                            <destFileName>newrelic</destFileName>
                         </configuration>
                     </execution>
                 </executions>
