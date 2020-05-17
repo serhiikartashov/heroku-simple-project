@@ -29,7 +29,7 @@
                 <configuration>
                     <assembleDirectory>target</assembleDirectory>
                     <extraJvmArguments>
-                        -javaagent:/app/target/newrelic/newrelic.jar
+                        -javaagent:target/newrelic/newrelic.jar
                     </extraJvmArguments>
                     <programs>
                         <program>
