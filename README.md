@@ -41,7 +41,7 @@ https://devcenter.heroku.com/articles/logging
 NOTE: heroku postgresql
 https://elements.heroku.com/addons/heroku-postgresql
 https://devcenter.heroku.com/articles/heroku-postgresql
-* ```heroku addons:create heroku-postgresql:hobby-dev --version=9.5```
+* ```heroku addons:create heroku-postgresql:hobby-dev``` -- create v12.2
 * ```heroku pg:wait``` 
 * ```heroku config``` -- will return connection $DATABASE_URL to database (AWS)
 https://devcenter.heroku.com/articles/config-vars
@@ -101,5 +101,9 @@ https://docs.newrelic.com/docs/agents/java-agent/heroku/java-agent-heroku
 * ```heroku config:set NEW_RELIC_LICENSE_KEY="key"```
 * ```heroku config:set NEW_RELIC_APP_NAME="java-project-template"```
 
-## PostGIS
+## PostGIS (v2.5)
 https://www.jhipster.tech/tips/028_tip_pgadmin_heroku.html
+```
+CREATE EXTENSION postgis;
+SELECT PostGIS_Version();
+```
