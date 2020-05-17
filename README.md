@@ -91,3 +91,12 @@ https://www.w3schools.com/tags/att_form_action.asp
 https://www.codejava.net/java-ee/servlet/handling-html-form-data-with-java-servlet
 
 https://stackoverflow.com/questions/3541077/design-patterns-web-based-applications/
+
+## Tokens generation
+ * copy token from sonar website -> manual configuration for maven
+ * `heroku auth:token` and set it in env variable `HEROKU_API_KEY`
+
+## NewRelic
+https://docs.newrelic.com/docs/agents/java-agent/heroku/java-agent-heroku
+* ```heroku config:set NEW_RELIC_LICENSE_KEY="key"```
+* ```heroku config:set NEW_RELIC_APP_NAME="java-project-template"```
