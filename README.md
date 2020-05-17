@@ -100,3 +100,6 @@ https://stackoverflow.com/questions/3541077/design-patterns-web-based-applicatio
 https://docs.newrelic.com/docs/agents/java-agent/heroku/java-agent-heroku
 * ```heroku config:set NEW_RELIC_LICENSE_KEY="key"```
 * ```heroku config:set NEW_RELIC_APP_NAME="java-project-template"```
+
+## PostGIS
+https://www.jhipster.tech/tips/028_tip_pgadmin_heroku.html
