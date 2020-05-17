@@ -28,6 +28,9 @@
                 <version>2.0.0</version>
                 <configuration>
                     <assembleDirectory>target</assembleDirectory>
+                    <extraJvmArguments>
+                        -javaagent:/app/newrelic/newrelic.jar
+                    </extraJvmArguments>
                     <programs>
                         <program>
                             <mainClass>org.example.Launcher</mainClass>
